@@ -11,7 +11,7 @@
 #include <stdexcept>
 
 namespace ThreadZone{
-const int max_thread_num = 16;
+const int max_thread_num = 8;
 
 //线程池,可以提交变参函数或Lamda表达式的匿名函数执行,可以获取执行返回值
 //不支持类成员函数, 支持类静态成员函数或全局函数,Opteron()函数等
@@ -71,8 +71,7 @@ public:
 	int threadCount() { return _pool.size(); }
 
 private:
-	
-	// 添加指定数量得线程
+	// 添加指定数量的线程
 	void addThread(unsigned size){
 		for(; _pool.size() < max_thread_num && size > 0; --size){
 			_pool.emplace_back([this]{
